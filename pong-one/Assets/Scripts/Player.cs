@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     public KeyCode upKey;
     public KeyCode downKey;
+    public float moveSpeed = 10f;
 
     private Paddle paddle;
 
@@ -18,13 +19,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(upKey))
         {
-            direction = 10f;
+            direction = 1f;
         }
         else if (Input.GetKey(downKey))
         {
-            direction = -10f;
+            direction = -1f;
         }
 
-        paddle.MoveVertically(direction);
+        paddle.MoveVertically(direction * moveSpeed);
     }
 }

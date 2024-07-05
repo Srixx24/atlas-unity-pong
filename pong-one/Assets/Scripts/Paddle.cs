@@ -2,24 +2,18 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float speed = 500f;
+    public float moveSpeed = 10f;
 
-    private Rigidbody2D rb;
+    private Transform paddleTransform;
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        paddleTransform = transform;
     }
 
     public void MoveVertically(float direction)
     {
-        if (rb != null)
-        {
-            rb.velocity = new Vector2(0, direction * speed);
-        }
-        else
-        {
-            Debug.LogWarning("Rigidbody2D component not found on Paddle object.");
-        }
+        // Move the paddle based on the direction
+        paddleTransform.Translate(Vector3.up * direction * moveSpeed * Time.deltaTime);
     }
 }
