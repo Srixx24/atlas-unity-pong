@@ -11,23 +11,22 @@ public class ScoreKeeper : MonoBehaviour
     public const int WinningScore = 11;
     public TextMeshProUGUI playerOneScore;
     public TextMeshProUGUI playerTwoScore;
-    public TextMeshProUGUI scoreText;
     private int playerOnePoints = 0;
     private int playerTwoPoints = 0;
     public int score = 0;
-    public UnityEvent<int> onScoreChanged;
+    public UnityEvent<int, int> onScoreChanged;
 
     public void GoalCheck()
     {
-        Collider2D[] goalColliders = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+        Collider2D[] goalColliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
         foreach (Collider2D collider in goalColliders)
         {
-            if (collider.gameObject.CompareTag("LeftGoal"))
+            if (collider.gameObject.CompareTag("Goal"))
             {
                 IncreasePlayerTwoScore();
                 ball.ResetBall();
             }
-            else if (collider.gameObject.CompareTag("RightGoal"))
+            else if (collider.gameObject.CompareTag("Goal"))
             {
                 IncreasePlayerOneScore();
                 ball.ResetBall();
@@ -39,28 +38,27 @@ public class ScoreKeeper : MonoBehaviour
     {
         playerOnePoints++;
         UpdateScoreText();
-        onScoreChanged.Invoke(playerOnePoints);
+        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
     }
 
     public void IncreasePlayerTwoScore()
     {
         playerTwoPoints++;
         UpdateScoreText();
-        onScoreChanged.Invoke(playerOnePoints);
+        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
     }
 
-    //check
+    // Updates Players scores
     private void UpdateScoreText()
     {
-        playerOneScore.text = playerOnePoints.ToString();
-        playerTwoScore.text = playerTwoPoints.ToString();
-        scoreText.text = $"{playerOnePoints} - {playerTwoPoints}";
+        playerOneScore.text = $"{playerOnePoints}";
+        playerTwoScore.text = $"{playerTwoPoints}";
     }
 
     public void ResetScore()
     {
         score = 0;
-        onScoreChanged.Invoke(score);
         UpdateScoreText();
+        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
     }
 }

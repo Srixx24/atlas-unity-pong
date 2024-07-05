@@ -4,9 +4,9 @@ public class Paddle : MonoBehaviour
 {
     public float moveSpeed = 10f;
 
-    private Transform paddleTransform;
+    public Transform paddleTransform;
 
-    private void Start()
+    public void Start()
     {
         paddleTransform = transform;
     }
@@ -15,5 +15,8 @@ public class Paddle : MonoBehaviour
     {
         // Move the paddle based on the direction
         paddleTransform.Translate(Vector3.up * direction * moveSpeed * Time.deltaTime);
+
+        // Clamp the paddle's y-position to the screen boundaries
+        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(transform.localPosition.y, -455, 455), transform.localPosition.z);
     }
 }

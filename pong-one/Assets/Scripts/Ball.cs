@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
     {
         // Apply an initial force in a random direction
         float angle = Random.value < 0.5f ? -1f : 1f;
-        float force = Random.value < 0.5f ? Random.Range(-10f, -0.1f) : Random.Range(0.1f, 10f);
+        float force = Random.value < 0.5f ? Random.Range(-10f, -0.8f) : Random.Range(0.8f, 10f);
 
         Vector2 direction = new Vector2(angle, force);
         rb.AddForce(direction * this.ballSpeed);

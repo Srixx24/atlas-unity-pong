@@ -29,17 +29,15 @@ public class GameManager : MonoBehaviour
         scoreKeeper.GoalCheck();
     }
 
-    private void OnScoreChanged(int scoreChanged)
+    private void OnScoreChanged(int playerOneScore, int playerTwoScore)
     {
-        CheckWinningCondition(scoreChanged);
+        CheckWinningCondition(playerOneScore, playerTwoScore);
     }
 
     // Checks for 11 points
-    private void CheckWinningCondition(int _)
+    private void CheckWinningCondition(int playerOneScore, int playerTwoScore)
     {
-        // Get the text values from the TextMeshProUGUI objects
-        int playerOneScore = int.Parse(playerOneScoreText.text);
-        int playerTwoScore = int.Parse(playerTwoScoreText.text);
+        
 
         if (playerOneScore >= WinningScore)
         {
