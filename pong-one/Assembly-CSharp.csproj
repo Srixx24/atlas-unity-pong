@@ -1059,8 +1059,20 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.MemoryProfiler">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Sysroot.Linux_x86_64">
       <HintPath>Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor.MemoryProfilerModule">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.MemoryProfilerModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PsdPlugin">
@@ -1169,6 +1181,10 @@
     </Reference>
     <Reference Include="Unity.Services.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Analytics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.SysrootPackage.Editor">

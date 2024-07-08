@@ -8,7 +8,6 @@ using TMPro;
 public class ScoreKeeper : MonoBehaviour
 {
     public Ball ball;
-    public const int WinningScore = 11;
     public TextMeshProUGUI playerOneScore;
     public TextMeshProUGUI playerTwoScore;
     private int playerOnePoints = 0;
@@ -16,18 +15,43 @@ public class ScoreKeeper : MonoBehaviour
     public int score = 0;
     public UnityEvent<int, int> onScoreChanged;
 
+
+    private void Start()
+    {
+        UpdateScoreText(playerOnePoints, playerTwoPoints);
+    }
+
+    private void OnEnable()
+    {
+        onScoreChanged.AddListener(UpdateScoreText);
+    }
+
+    private void OnDisable()
+    {
+        onScoreChanged.RemoveListener(UpdateScoreText);
+    }
+
     public void GoalCheck()
     {
-        Collider2D[] goalColliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
-        foreach (Collider2D collider in goalColliders)
+        /* The GoalCheck() method is used to detect if the ball has entered either of the two goals.
+         * It uses Physics2D.OverlapCircle() to check if there is a collider at the ball's position
+         * with the "Goal" tag. If a goal is scored, it calls either IncreasePlayerOneScore() or
+         * IncreasePlayerTwoScore() to update the score, and then resets the ball's position.
+         */
+
+        Collider2D goalCollider = Physics2D.OverlapCircle(ball.transform.position, 0.5f);
+        if (goalCollider != null && goalCollider.CompareTag("Goal"))
         {
-            if (collider.gameObject.CompareTag("Goal"))
+            Debug.Log("Goal scored!");
+            IncreasePlayerTwoScore();
+            ball.ResetBall();
+        }
+        else
+        {
+            goalCollider = Physics2D.OverlapCircle(ball.transform.position, 0.5f);
+            if (goalCollider != null && goalCollider.CompareTag("Goal"))
             {
-                IncreasePlayerTwoScore();
-                ball.ResetBall();
-            }
-            else if (collider.gameObject.CompareTag("Goal"))
-            {
+                Debug.Log("Goal scored!");
                 IncreasePlayerOneScore();
                 ball.ResetBall();
             }
@@ -37,28 +61,30 @@ public class ScoreKeeper : MonoBehaviour
     public void IncreasePlayerOneScore()
     {
         playerOnePoints++;
-        UpdateScoreText();
-        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
+        UpdateScoreText(playerOnePoints, playerTwoPoints);
     }
 
     public void IncreasePlayerTwoScore()
     {
         playerTwoPoints++;
-        UpdateScoreText();
-        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
+        UpdateScoreText(playerOnePoints, playerTwoPoints);
     }
 
-    // Updates Players scores
-    private void UpdateScoreText()
+    private void UpdateScoreText(int p1Score, int p2Score)
     {
-        playerOneScore.text = $"{playerOnePoints}";
-        playerTwoScore.text = $"{playerTwoPoints}";
+        /* The UpdateScoreText() method updates the text of the playerOneScore and
+         * playerTwoScore TextMeshProUGUI components with the current scores for
+         * each player.
+         */
+        playerOneScore.text = $"{p1Score}";
+        playerTwoScore.text = $"{p2Score}";
     }
 
     public void ResetScore()
     {
         score = 0;
-        UpdateScoreText();
-        onScoreChanged.Invoke(playerOnePoints, playerTwoPoints);
+        playerOnePoints = 0;
+        playerTwoPoints = 0;
+        UpdateScoreText(playerOnePoints, playerTwoPoints);
     }
 }

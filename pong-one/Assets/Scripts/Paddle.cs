@@ -4,7 +4,7 @@ public class Paddle : MonoBehaviour
 {
     public float moveSpeed = 10f;
 
-    public Transform paddleTransform;
+    private Transform paddleTransform;
 
     public void Start()
     {
