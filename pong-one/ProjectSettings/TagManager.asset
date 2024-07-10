@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Border
   - Paddle
+  - SecretGoal
   layers:
   - Default
   - TransparentFX

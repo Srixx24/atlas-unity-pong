@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     public Vector3 velocity;
     private AudioSource audioSource;
     public AudioClip paddleSound;
+    public AudioClip goalSound;
     public AudioClip borderSound;
     private float pitchRange = 0.4f;
 
@@ -54,7 +55,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the ball collided with a paddle or a goal
-        if (collision.gameObject.CompareTag("Paddle") || collision.gameObject.CompareTag("Border"))
+        if (collision.gameObject.CompareTag("Paddle") || collision.gameObject.CompareTag("Goal") || collision.gameObject.CompareTag("Border"))
         {
             // Play the impact sound effect
             PlayImpactSound(collision);
@@ -81,6 +82,10 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Paddle"))
         {
             audioSource.clip = paddleSound;
+        }
+        else if (collision.gameObject.CompareTag("Goal"))
+        {
+            audioSource.clip = borderSound;
         }
         else if (collision.gameObject.CompareTag("Border"))
         {
