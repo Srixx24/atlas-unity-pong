@@ -67,11 +67,14 @@ public class Ball : MonoBehaviour
         // Increase the ball's velocity
         velocity *= (1 + accelerationRate * Time.deltaTime);
 
-        // Limit the ball's speed to the maximum speed
-        if (velocity.magnitude > maxSpeed)
-        {
-            velocity = velocity.normalized * maxSpeed;
-        }
+        speed = velocity.magnitude;
+
+    // Limit the ball's speed to the maximum speed
+    if (speed > maxSpeed)
+    {
+        velocity = velocity.normalized * maxSpeed;
+        speed = maxSpeed;
+    }
     }
 
     private void PlayImpactSound(Collision2D collision)

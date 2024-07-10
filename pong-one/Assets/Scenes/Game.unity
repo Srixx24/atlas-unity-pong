@@ -6387,6 +6387,10 @@ PrefabInstance:
       value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 8889321671972806474, guid: 64305ee651b913b47a563747958ba4d4, type: 3}
+      propertyPath: maxSpeed
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889321671972806474, guid: 64305ee651b913b47a563747958ba4d4, type: 3}
       propertyPath: ballSpeed
       value: 1000
       objectReference: {fileID: 0}
@@ -6402,6 +6406,10 @@ PrefabInstance:
       propertyPath: paddleSound
       value: 
       objectReference: {fileID: 8300000, guid: 2e1c0edfc97324f3cbdc4ed5f343753b, type: 3}
+    - target: {fileID: 8889321671972806474, guid: 64305ee651b913b47a563747958ba4d4, type: 3}
+      propertyPath: accelerationRate
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
