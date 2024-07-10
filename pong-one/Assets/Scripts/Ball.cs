@@ -85,7 +85,7 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Goal"))
         {
-            audioSource.clip = borderSound;
+            audioSource.clip = goalSound;
         }
         else if (collision.gameObject.CompareTag("Border"))
         {
