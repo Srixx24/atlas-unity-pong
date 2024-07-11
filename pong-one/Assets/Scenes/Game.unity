@@ -6659,6 +6659,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 8042728896361338215, guid: afe844e5210ffa446b03547b44c12875, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 8042728896361338215, guid: afe844e5210ffa446b03547b44c12875, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 8615994704765851412, guid: afe844e5210ffa446b03547b44c12875, type: 3}
       propertyPath: m_Name
       value: Canvas
