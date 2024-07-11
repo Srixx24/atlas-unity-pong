@@ -31,46 +31,37 @@ public class ScoreKeeper : MonoBehaviour
         onScoreChanged.RemoveListener(UpdateScoreText);
     }
 
-    public void GoalCheck()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        /* The GoalCheck() method is used to detect if the ball has entered either of the two goals.
-         * It uses Physics2D.OverlapCircle() to check if there is a collider at the ball's position
-         * with the "Goal" tag. If a goal is scored, it calls either IncreasePlayerOneScore() or
-         * IncreasePlayerTwoScore() to update the score, and then resets the ball's position.
-         */
-
-        Collider2D goalCollider = Physics2D.OverlapCircle(ball.transform.position, 0.5f);
-        if (goalCollider != null && goalCollider.CompareTag("Goal"))
-        {
-            Debug.Log("Goal scored!");
-            IncreasePlayerTwoScore();
-            ball.ResetBall();
-        }
-        else
-        {
-            goalCollider = Physics2D.OverlapCircle(ball.transform.position, 0.5f);
-            if (goalCollider != null && goalCollider.CompareTag("Goal"))
-            {
-                Debug.Log("Goal scored!");
-                IncreasePlayerOneScore();
-                ball.ResetBall();
-            }
-        }
+        if (collision.CompareTag("Player2"))
+    {
+        Debug.Log("leftGoal");
+        IncreasePlayerTwoScore();
+        ball.ResetBall();
+    }
+    else if (collision.CompareTag("Player1"))
+    {
+        Debug.Log("rightGoal");
+        IncreasePlayerOneScore();
+        ball.ResetBall();
+    }
     }
 
     public void IncreasePlayerOneScore()
     {
         playerOnePoints++;
         UpdateScoreText(playerOnePoints, playerTwoPoints);
+        Debug.Log("Player 1 scored a goal!");
     }
 
     public void IncreasePlayerTwoScore()
     {
         playerTwoPoints++;
         UpdateScoreText(playerOnePoints, playerTwoPoints);
+        Debug.Log("Player 2 scored a goal!");
     }
 
-    private void UpdateScoreText(int p1Score, int p2Score)
+    public void UpdateScoreText(int p1Score, int p2Score)
     {
         /* The UpdateScoreText() method updates the text of the playerOneScore and
          * playerTwoScore TextMeshProUGUI components with the current scores for

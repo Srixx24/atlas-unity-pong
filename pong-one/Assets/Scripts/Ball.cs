@@ -106,8 +106,19 @@ public class Ball : MonoBehaviour
         * its initial position, and then applies a new random force to the ball
         * using the AddForce() method.
         */
-        rb.velocity = Vector2.zero;
-        transform.position = initialPosition;
+        ResetVelocityAndSpeed();
+        transform.position = new Vector3(1278f, 715f, 42f);
         AddForce();
+    }
+
+    private void ResetVelocityAndSpeed()
+    {
+        /* The ResetVelocityAndSpeed() method resets the ball's velocity to the
+        * initial velocity and then applies the IncreaseSpeed() method to
+        * gradually increase the ball's speed back to the desired level.
+        */
+        rb.velocity = Vector2.zero;
+        velocity = new Vector3(speed, 0f, 0f);
+        IncreaseSpeed();
     }
 }

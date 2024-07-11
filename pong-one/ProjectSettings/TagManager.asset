@@ -9,6 +9,8 @@ TagManager:
   - Border
   - Paddle
   - SecretGoal
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

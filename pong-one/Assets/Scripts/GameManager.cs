@@ -23,24 +23,38 @@ public class GameManager : MonoBehaviour
         scoreKeeper.playerOneScore = playerOneScoreText;
         scoreKeeper.playerTwoScore = playerTwoScoreText;
 
-        scoreKeeper.onScoreChanged.AddListener(OnScoreChanged);
+        //scoreKeeper.onScoreChanged.AddListener(OnScoreChanged);
 
         audioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
     {
-        // Call the GoalCheck method of ScoreKeeper to check for winning score
-        scoreKeeper.GoalCheck();
+        // Check if the ball has entered the goal area
+        CheckGoal();
     }
 
-    private void OnScoreChanged(int playerOneScore, int playerTwoScore)
+    private void CheckGoal()
     {
-        /*
-         * Call the CheckWinningCondition method whenever the score changes,
-         * passing the current scores of both players.
-         */
-        CheckWinningCondition(playerOneScore, playerTwoScore);
+        // Use the OnTriggerEnter2D event in the ScoreKeeper class to detect goals
+        Collider2D goalCollider = Physics2D.OverlapCircle(scoreKeeper.ball.transform.position, 0.5f, LayerMask.GetMask("Goal"));
+        if (goalCollider != null)
+        {
+            // If a goal is detected, update the scores accordingly
+            if (goalCollider.transform.position.x < 0)
+            {
+                // Goal scored by player two
+                scoreKeeper.playerTwoScore.text = (int.Parse(scoreKeeper.playerTwoScore.text) + 1).ToString();
+            }
+            else
+            {
+                // Goal scored by player one
+                scoreKeeper.playerOneScore.text = (int.Parse(scoreKeeper.playerOneScore.text) + 1).ToString();
+            }
+
+            // Check the winning condition after a goal is scored
+            CheckWinningCondition(int.Parse(scoreKeeper.playerOneScore.text), int.Parse(scoreKeeper.playerTwoScore.text));
+        }
     }
 
     // Checks for 11 points by either players
