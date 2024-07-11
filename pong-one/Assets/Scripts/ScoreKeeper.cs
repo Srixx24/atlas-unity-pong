@@ -31,20 +31,22 @@ public class ScoreKeeper : MonoBehaviour
         onScoreChanged.RemoveListener(UpdateScoreText);
     }
 
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player2"))
-    {
-        Debug.Log("leftGoal");
-        IncreasePlayerTwoScore();
-        ball.ResetBall();
-    }
-    else if (collision.CompareTag("Player1"))
-    {
+        {
+            Debug.Log("leftGoal");
+            IncreasePlayerTwoScore();
+            ball.ResetBall();
+        }
+        else if (collision.CompareTag("Player1"))
+        {
         Debug.Log("rightGoal");
         IncreasePlayerOneScore();
         ball.ResetBall();
-    }
+        }
     }
 
     public void IncreasePlayerOneScore()
